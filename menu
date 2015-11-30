@@ -1,0 +1,9 @@
+Opções para o menu principal:
+
+Inserir nova estação;
+Remover uma estação;
+Caminhamento (Largura ou profundidade);
+Verificação de rotas redundantes;
+Determinação da qtde. de estação conectadas;
+Caminho masi curto entre duas estações;
+Sair.
