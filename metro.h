@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef int TipoPeso;
+typedef struct{
+	float distancia;
+	float preco;
+}TipoPeso;
+
 typedef int TipoVertice;
 typedef struct grafo TipoGrafo;
 
@@ -13,3 +17,5 @@ int ConsultaAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2,TipoPeso *pe
 void MostraListaAdjacentes(TipoGrafo *Grafo, TipoVertice v);
 void MostraGrafo(TipoGrafo *Grafo);
 TipoGrafo *LiberaGrafo(TipoGrafo *Grafo);
+
+int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo);
