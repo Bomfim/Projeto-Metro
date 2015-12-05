@@ -19,3 +19,4 @@ void MostraGrafo(TipoGrafo *Grafo);
 TipoGrafo *LiberaGrafo(TipoGrafo *Grafo);
 
 int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo);
+int GravaArestaArquivo(FILE *fp, TipoVertice v1, TipoVertice v2, TipoPeso peso);
