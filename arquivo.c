@@ -1,7 +1,7 @@
 #include "metro.h"
 
 int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo){
-	
+
 	int v1, v2;
 	TipoPeso peso;
 
@@ -20,7 +20,7 @@ int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo){
 	}
 
   	fclose(fp);
-	
+
 	return 1;
 }
 
