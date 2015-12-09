@@ -42,6 +42,7 @@ int InsereAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2, TipoPeso peso
 
     Grafo->Mat[v1][v2] = peso;
     Grafo->numArestas++;
+
     return 1;
 }
 

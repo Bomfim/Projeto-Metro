@@ -26,9 +26,6 @@ int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo){
 
 int GravaArestaArquivo(FILE *fp, TipoVertice v1, TipoVertice v2, TipoPeso peso){
 
-	if(peso.distancia == 0 && peso.distancia == 0)
-		return 0;
-
 	fp = fopen("insere_aresta.txt","a+");
 	if(fp == NULL)
 		return 0;
