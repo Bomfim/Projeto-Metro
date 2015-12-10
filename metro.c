@@ -31,6 +31,10 @@ TipoGrafo *Cria_grafo(int Nvertices) {
                 free(Grafo->Mat[k]);
         }
     }
+
+    Grafo->NumVertices = Nvertices;
+    Grafo->NumArestas = 0;
+
     return Grafo;
 }
 
@@ -39,7 +43,7 @@ int InsereAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2, TipoPeso peso
     if (Grafo == NULL)
         return -1;  //GRAFO NÃO EXISTE
 
-    if (Grafo->Mat[v1][v2].distancia != 0 && Grafo->Mat[v1][v2].preco != 0 || peso.distancia == 0 && peso.preco == 0)
+    if ((Grafo->Mat[v1][v2].distancia != 0 && Grafo->Mat[v1][v2].preco != 0) || (peso.distancia == 0 && peso.preco == 0))
         return 0;   //JÁ EXISTE ARESTA ENTRE V1 E V2
 
     Grafo->Mat[v1][v2] = peso;
@@ -97,8 +101,8 @@ void MostraListaAdjacentes(TipoGrafo *Grafo, TipoVertice v) {
         printf("Lista de Adjacentes à %d :\n", v);
         for (i = 0; i < Grafo->NumVertices; i++) {
 
-            if (Grafo->Mat[i] != 0) {
-                printf("%d (Distancia: %0.2f; Preco: %0.2f)\n", i, Grafo->Mat[v][i].distancia, Grafo->Mat[v][i].preco);
+            if (Grafo->Mat[v][i].distancia != 0 && Grafo->Mat[v][i].preco != 0) {
+                printf("Vertice: %d (Distancia: %0.2f; Preco: %0.2f)\n", i, Grafo->Mat[v][i].distancia, Grafo->Mat[v][i].preco);
                 flag = 1;
             }
         }
@@ -117,8 +121,11 @@ void MostraGrafo(TipoGrafo *Grafo) {
 
     else {
         for (i = 0; i < Grafo->NumVertices; i++) {
+
+            flag = 0;
             printf("%d -> ", i);
-            for (j = 0; j < Grafo->NumArestas; j++) {
+
+            for (j = 0; j < Grafo->NumVertices; j++) {
                 if (Grafo->Mat[i][j].distancia != 0 && Grafo->Mat[i][j].preco != 0) {
                     printf("%d (Distancia: %0.2f; Preco: %0.2f)\n", j, Grafo->Mat[i][j].distancia,
                            Grafo->Mat[i][j].preco);
@@ -129,6 +136,7 @@ void MostraGrafo(TipoGrafo *Grafo) {
                 printf("Grafo nao possui vertices adjacentes\n");
         }
     }
+
 }
 
 TipoGrafo *LiberaGrafo(TipoGrafo *Grafo) {

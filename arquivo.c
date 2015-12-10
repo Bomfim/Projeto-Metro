@@ -15,8 +15,7 @@ int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo){
 		fscanf(fp, "%f", &peso.distancia);
 		fscanf(fp, "%f", &peso.preco);
 
-	if(!InsereAresta(Grafo,v1,v2,peso))
-		printf("A aresta dos vertices %d e %d nao foi inserida.\n", v1, v2);
+		InsereAresta(Grafo,v1,v2,peso);
 	}
 
   	fclose(fp);
