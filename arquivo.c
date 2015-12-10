@@ -29,10 +29,10 @@ int GravaArestaArquivo(FILE *fp, TipoVertice v1, TipoVertice v2, TipoPeso peso){
 	if(fp == NULL)
 		return 0;
 
-	fprintf(fp, "%d", v1);
-	fprintf(fp, "%d", v2);
-	fprintf(fp, "%0.2f", peso.distancia);
-	fprintf(fp, "%0.2f", peso.preco);
+	fprintf(fp, "\n%d\n", v1);
+	fprintf(fp, "%d\n", v2);
+	fprintf(fp, "%0.2f\n", peso.distancia);
+	fprintf(fp, "%0.2f\n", peso.preco);
 
 	fclose(fp);
 

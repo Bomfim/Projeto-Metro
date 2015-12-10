@@ -51,8 +51,10 @@ int main(){
 
 				res = InsereAresta(grafo, v1, v2, peso);
 
-				if(res == 1)
+				if(res == 1){
 					printf("\nAresta foi inserida.\n");
+					GravaArestaArquivo(fp, v1, v2, peso);
+				}
 				else{
 					if(res == 0)
 						printf("\nAresta nao existe.\n");
