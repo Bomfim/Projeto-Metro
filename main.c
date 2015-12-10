@@ -17,6 +17,7 @@ int main(){
 	printf("8- Libera Grafo\n");
 	printf("9- Caminho mais curto.\n");
 	printf("10- Insere Arestas Arquivo.\n");
+	printf("11- Mostrar Mapa.\n");
 	printf("0- Sair.");
 
 	do{
@@ -164,12 +165,23 @@ int main(){
 				scanf("%d",&v2);
 
 				Caminho_mais_Curto(grafo, v1, v2);
+
+				break;
 			}
 
 			case 10:{
 
 				if(InsereArestaArquivo(fp, grafo))
 					printf("Arestas inseridas");
+
+				break;
+			}
+
+			case 11:{
+
+				mostrarMapa(fp);
+
+				break;
 			}
 
 			default:

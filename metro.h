@@ -32,3 +32,5 @@ int InsereArestaArquivo(FILE *fp, TipoGrafo *Grafo);
 int GravaArestaArquivo(FILE *fp, TipoVertice v1, TipoVertice v2, TipoPeso peso);
 
 void Caminho_mais_Curto(TipoGrafo *grafo, int origem, int destino);
+
+void mostrarMapa(FILE *fp);
