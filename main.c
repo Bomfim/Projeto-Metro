@@ -17,7 +17,8 @@ int main(){
 	printf("8- Libera Grafo\n");
 	printf("9- Caminho mais curto.\n");
 	printf("10- Insere Arestas Arquivo.\n");
-	printf("11- Mostrar Mapa.\n");
+	printf("11- Desativa Estação.\n");
+	printf("12- Mostrar Estações Desativadas.\n");
 	printf("0- Sair.");
 
 	do{
@@ -179,7 +180,25 @@ int main(){
 
 			case 11:{
 
-				mostrarMapa(fp);
+				printf("\nEscolha a estação:\n");
+				scanf("%d",&v1);
+
+				res = DesativaVertice(grafo, v1);
+
+				if(res == 1)
+					printf("Estação %d desativada\n", v1);
+				else{
+					if(res == 0)
+						printf("\nEstação já estava desativada.\n");
+					else
+						printf("\nGrafo nao existe.\n");
+				}
+
+				break;
+			}
+
+			case 12:{
+				VerticesDesativados(grafo);
 
 				break;
 			}

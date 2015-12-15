@@ -38,20 +38,3 @@ int GravaArestaArquivo(FILE *fp, TipoVertice v1, TipoVertice v2, TipoPeso peso){
 
 	return 1;
 }
-
-void mostrarMapa(FILE *fp){
-	char buff[255];
-	fp = fopen("estacoes.txt","r");
-	if(fp == NULL)
-		return 0;
-
-
-	while(!feof(fp)){
-		fgets(buff, 255, fp);
-		printf("%s\n", buff );
-	}
-
-	fclose(fp);
-
-	return 1;
-}
