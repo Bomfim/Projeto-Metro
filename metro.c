@@ -31,10 +31,10 @@ TipoGrafo *Cria_grafo(int Nvertices) {
         free(Grafo);
         return NULL;
     }
-    for (i = 1; i <= Nvertices; i++) {
+    for (i = 0; i < Nvertices; i++) {
         Grafo->Mat[i] = (TipoPeso *) calloc(Nvertices, sizeof(TipoPeso));
         if (Grafo->Mat[i] == NULL) {
-            for (k = 1; k <= i; k++)
+            for (k = 0; k < i; k++)
                 free(Grafo->Mat[k]);
         }
     }
@@ -54,11 +54,11 @@ int InsereAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2, TipoPeso peso
     if (Grafo == NULL)
         return -1;  //GRAFO NÃO EXISTE
 
-    if ((Grafo->Mat[v1][v2].distancia != 0 && Grafo->Mat[v1][v2].preco != 0) || (peso.distancia == 0 && peso.preco == 0))
+    if ((Grafo->Mat[v1-1][v2-1].distancia != 0 && Grafo->Mat[v1-1][v2-1].preco != 0) || (peso.distancia == 0 && peso.preco == 0))
         return 0;   //JÁ EXISTE ARESTA ENTRE V1 E V2
 
-    Grafo->Mat[v1][v2] = peso;
-    Grafo->Mat[v2][v1] = peso;
+    Grafo->Mat[v1-1][v2-1] = peso;
+    Grafo->Mat[v2-1][v1-1] = peso;
     Grafo->NumArestas++;
 
     return 1;
@@ -69,7 +69,7 @@ int ExisteAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2) {
     if (Grafo == NULL)
         return -1;
 
-    if (Grafo->Mat[v1][v2].distancia == 0 && Grafo->Mat[v1][v2].preco == 0)
+    if (Grafo->Mat[v1-1][v2-1].distancia == 0 && Grafo->Mat[v1-1][v2-1].preco == 0)
         return 0; //NÃO EXISTE ARESTA LIGANDO V1 E V2
 
     return 1; //EXISTE ARESTA!
@@ -80,14 +80,14 @@ int RetiraAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2) {
     if (Grafo == NULL)
         return -1;
 
-    if (Grafo->Mat[v1][v2].distancia == 0 && Grafo->Mat[v1][v2].preco == 0)
+    if (Grafo->Mat[v1-1][v2-1].distancia == 0 && Grafo->Mat[v1-1][v2-1].preco == 0)
         return 0; // ARESTA NÃO EXISTE
 
-    Grafo->Mat[v1][v2].distancia = 0; // REMOVENDO ARESTA
-    Grafo->Mat[v1][v2].preco = 0;
+    Grafo->Mat[v1-1][v2-1].distancia = 0; // REMOVENDO ARESTA
+    Grafo->Mat[v1-1][v2-1].preco = 0;
 
-    Grafo->Mat[v2][v1].distancia = 0; // REMOVENDO ARESTA
-    Grafo->Mat[v2][v1].preco = 0;
+    Grafo->Mat[v2-1][v1-1].distancia = 0; // REMOVENDO ARESTA
+    Grafo->Mat[v2-1][v1-1].preco = 0;
 
     Grafo->NumArestas--;
     return 1;
@@ -100,10 +100,10 @@ int ConsultaAresta(TipoGrafo *Grafo, TipoVertice v1, TipoVertice v2, TipoPeso *p
     if (Grafo == NULL)
         return -1;
 
-    if (Grafo->Mat[v1][v2].distancia == 0 && Grafo->Mat[v1][v2].preco == 0)
+    if (Grafo->Mat[v1-1][v2-1].distancia == 0 && Grafo->Mat[v1-1][v2-1].preco == 0)
         return 0;
 
-    *peso = Grafo->Mat[v1][v2];
+    *peso = Grafo->Mat[v1-1][v2-1];
     return 1;
 }
 
@@ -116,10 +116,10 @@ void MostraListaAdjacentes(TipoGrafo *Grafo, TipoVertice v) {
 
     else {
         printf("Lista de Adjacentes à %d :\n", v);
-        for (i = 1; i <= Grafo->NumVertices; i++) {
+        for (i = 0; i < Grafo->NumVertices; i++) {
 
-            if (Grafo->Mat[v][i].distancia != 0 && Grafo->Mat[v][i].preco != 0 ) {
-                printf("Vertice: %d (Distancia: %0.2f; Preco: %0.2f)\n", i, Grafo->Mat[v][i].distancia, Grafo->Mat[v][i].preco);
+            if (Grafo->Mat[v-1][i].distancia != 0 && Grafo->Mat[v-1][i].preco != 0 ) {
+                printf("Vertice: %d (Distancia: %0.2f; Preco: %0.2f)\n", i+1, Grafo->Mat[v-1][i].distancia, Grafo->Mat[v-1][i].preco);
                 flag = 1;
             }
         }
@@ -137,14 +137,14 @@ void MostraGrafo(TipoGrafo *Grafo) {
     }
 
     else {
-        for (i = 1; i <= Grafo->NumVertices; i++) {
+        for (i = 0; i < Grafo->NumVertices; i++) {
 
             flag = 0;
-            printf("Estacao : %d \n", i);
+            printf("Estacao : %d \n", i+1);
 
-            for (j = 1; j <= Grafo->NumVertices; j++) {
+            for (j = 0; j < Grafo->NumVertices; j++) {
                 if (Grafo->Mat[i][j].distancia != 0 && Grafo->Mat[i][j].preco != 0) {
-                    printf("%d (Distancia: %0.2f; Preco: %0.2f)\n", j, Grafo->Mat[i][j].distancia,
+                    printf("%d (Distancia: %0.2f; Preco: %0.2f)\n", j+1, Grafo->Mat[i][j].distancia,
                            Grafo->Mat[i][j].preco);
                     flag = 1;
                 }
@@ -164,7 +164,7 @@ TipoGrafo *LiberaGrafo(TipoGrafo *Grafo) {
     if (Grafo == NULL)
         return NULL;
 
-    for (i = 1; i <= Grafo->NumVertices; i++) {
+    for (i = 0; i < Grafo->NumVertices; i++) {
         free(Grafo->Mat[i]);
     }
     free(Grafo->Mat);
@@ -174,6 +174,8 @@ TipoGrafo *LiberaGrafo(TipoGrafo *Grafo) {
 }
 
 void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
+    origem--;
+    destino--;
 
     int vert,i, k;
     float NovaDist,min;
@@ -183,10 +185,10 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
     int *caminho = (int *) malloc(Grafo->NumVertices * 3 * sizeof(int));
 
     //INICIALIZANDO VARIÁVEIS
-    for (int i = 1; i <= Grafo->NumVertices; i++) {
+    for (i = 0; i < Grafo->NumVertices; i++) {
         M[i] = 0;       //FALSE - DETERMINA SE UM VÉRTICE JÁ FOI VISITADO
         A[i] = -1;      // DETERMINA O CAMINHO MAIS CURTO ENTRE ORIGEM E DESTINO
-        L[i] = 300000;
+        L[i] = 300000;  //infinito determina o comprimento do caminho mais curto
     }
 
     vert = origem;
@@ -194,21 +196,25 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
 
     while (vert != destino && vert != -1) {                         // NÃO TERMINOU OU CAMINHO INEXISTENTE
 
-        for (int i = 1; i <= Grafo->NumVertices; i++) {              // PERCORRE VERTICES ADJACENTES DE VERT
+        for (i = 0; i < Grafo->NumVertices; i++) {              // PERCORRE VERTICES ADJACENTES DE VERT
 
             if (Grafo->Mat[vert][i].distancia != 0 && M[i] == 0) {  // SE ARESTA EXISTE E ELA NÃO FOI VISITADA
 
                 NovaDist = (L[vert] + Grafo->Mat[vert][i].distancia);
+
                 if (NovaDist < L[i]) {
                     L[i] = NovaDist;                                // ATUALIZA MENOR DISTANCIA
                     A[i] = vert;                                    // ATUALIZA CAMINHO
                 }
             }
         }
+
         M[vert] = 1;    //TODA A LISTA DE ADJACENTES DE VERT JÁ FOI ANALISADA
         min = 300000;  //MAIOR FLOAT POSSIVEL
         vert = -1;      //VALOR INVÁLIDO
-        for (i = 1; i <= Grafo->NumVertices; i++) {  //ENCONTRA PRÓXIMO VERTICE DO CAMINHO
+
+        for (i = 0; i < Grafo->NumVertices; i++) {  //ENCONTRA PRÓXIMO VERTICE DO CAMINHO
+
             if (M[i] == 0 && L[i] < min) {          // ESCOLHE O VERTICE CUJA ARESTA POSSUI O MENOR PESO
 
                 min = L[i];
@@ -221,9 +227,11 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
 
     if (vert == destino) {  //ENCONTROU UM CAMINHO
 
-        printf("Caminho mais curto entre %d e %d tem comprimento %0.2f:\n", origem, destino, L[destino]);
+        printf("Caminho mais curto entre %d e %d tem comprimento %0.2f:\n", origem+1, destino+1, L[destino]);
+
         caminho[0] = destino;
         k = 1;
+
         while (vert != origem) {
             caminho[k] = A[vert];
             vert = A[vert];
@@ -231,9 +239,9 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
         }
         for (i = k - 1; i >= 0; --i) {
             if(i != 0)
-                printf("%d->", caminho[i]);
+                printf("%d->", caminho[i]+1);
             else
-                printf("%d", caminho[i]);
+                printf("%d", caminho[i]+1);
         }
     }
     else
@@ -258,10 +266,10 @@ void VerticesDesativados(TipoGrafo* Grafo){
 
     printf("\nEstações desativadas: ");
 
-    for(i = 1; i <= Grafo->NumVertices; i++){
-        if(Grafo->verticesDesativados[i-1] == 0){
+    for(i = 0; i < Grafo->NumVertices; i++){
+        if(Grafo->verticesDesativados[i] == 0){
             flag = 1;
-            printf("%d ", i);
+            printf("%d ", i+1);
         }
     }
 
