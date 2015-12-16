@@ -115,16 +115,16 @@ void MostraListaAdjacentes(TipoGrafo *Grafo, TipoVertice v) {
         return;
 
     else {
-        printf("Lista de Adjacentes à %d :\n", v);
+        printf("Lista de Adjacentes à Estação %d :\n", v);
         for (i = 0; i < Grafo->NumVertices; i++) {
 
             if (Grafo->Mat[v-1][i].distancia != 0 && Grafo->Mat[v-1][i].preco != 0 ) {
-                printf("Vertice: %d (Distancia: %0.2f; Preco: %0.2f)\n", i+1, Grafo->Mat[v-1][i].distancia, Grafo->Mat[v-1][i].preco);
+                printf("Estação: %d (Distancia: %0.2f; Preco: %0.2f)\n", i+1, Grafo->Mat[v-1][i].distancia, Grafo->Mat[v-1][i].preco);
                 flag = 1;
             }
         }
         if (flag == 0)
-            printf("Vertice %d nao possui vertices adjacentes\n", v);
+            printf("Estação %d nao possui estações adjacentes\n", v);
     }
 }
 
@@ -150,7 +150,7 @@ void MostraGrafo(TipoGrafo *Grafo) {
                 }
             }
             if (flag == 0)
-                printf("Grafo nao possui vertices adjacentes\n");
+                printf("Grafo nao possui estações.\n");
 
             printf("-------------------------------------------\n");
         }

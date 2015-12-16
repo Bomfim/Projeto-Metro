@@ -30,7 +30,7 @@ int main(){
 
 			case 1:{
 
-				printf("\nEscolha o numero de vertices:\n");
+				printf("\nEscolha o numero de estações:\n");
 				scanf("%d",&num);
 
 				grafo = Cria_grafo(num);
@@ -40,10 +40,10 @@ int main(){
 
 			case 2:{
 
-				printf("\nPrimeiro vertice:\n");
+				printf("\nPrimeira estação:\n");
 				scanf("%d",&v1);
 
-				printf("\nSegundo vertice:\n");
+				printf("\nSegunda estação:\n");
 				scanf("%d",&v2);
 
 				printf("\nDistancia:\n");
@@ -70,10 +70,10 @@ int main(){
 
 			case 3:{
 
-				printf("\nEscolha o primeiro vertice:\n");
+				printf("\nEscolha a primeira estação:\n");
 				scanf("%d",&v1);
 
-				printf("\nEscolha o segundo vertice:\n");
+				printf("\nEscolha a segunda estação:\n");
 				scanf("%d",&v2);
 
 				res = ExisteAresta(grafo, v1, v2);
@@ -92,10 +92,10 @@ int main(){
 
 			case 4:{
 
-				printf("\nEscolha o primeiro vertice:\n");
+				printf("\nEscolha a primeira estação:\n");
 				scanf("%d",&v1);
 
-				printf("\nEscolha o segundo vertice:\n");
+				printf("\nEscolha a segunda estação:\n");
 				scanf("%d",&v2);
 
 				res = RetiraAresta(grafo, v1, v2);
@@ -114,10 +114,10 @@ int main(){
 
 			case 5:{
 
-				printf("\nEscolha o primeiro vertice:\n");
+				printf("\nEscolha a primeira estação:\n");
 				scanf("%d",&v1);
 
-				printf("\nEscolha o segundo vertice:\n");
+				printf("\nEscolha a segunda estação:\n");
 				scanf("%d",&v2);
 
 				res = ConsultaAresta(grafo, v1, v2, &peso);
@@ -136,7 +136,7 @@ int main(){
 
 			case 6:{
 
-				printf("\nEscolha o vertice:\n");
+				printf("\nEscolha a estação:\n");
 				scanf("%d",&v1);
 
 				MostraListaAdjacentes(grafo, v1);
@@ -160,10 +160,10 @@ int main(){
 
 			case 9:{
 
-				printf("\nEscolha o vertice de origem:\n");
+				printf("\nEscolha a estação de origem:\n");
 				scanf("%d",&v1);
 
-				printf("\nEscolha o vertice de destino:\n");
+				printf("\nEscolha a estação de destino:\n");
 				scanf("%d",&v2);
 
 				Caminho_mais_Curto(grafo, v1, v2);
@@ -205,10 +205,10 @@ int main(){
 			}
 
 			case 13:{
-				printf("\nEscolha o vertice de origem:\n");
+				printf("\nEscolha a estação de origem:\n");
 				scanf("%d",&v1);
 
-				printf("\nEscolha o vertice de destino:\n");
+				printf("\nEscolha a estação de destino:\n");
 				scanf("%d",&v2);
 
 				Caminho_mais_Barato(grafo, v1, v2);
