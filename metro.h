@@ -36,3 +36,5 @@ void Caminho_mais_Curto(TipoGrafo *grafo, int origem, int destino);
 int DesativaVertice(TipoGrafo* Grafo, TipoVertice v);
 
 void VerticesDesativados(TipoGrafo* Grafo);
+
+void Caminho_mais_Barato(TipoGrafo *Grafo, int origem, int destino);

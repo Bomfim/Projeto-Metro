@@ -198,7 +198,7 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
 
         for (i = 0; i < Grafo->NumVertices; i++) {              // PERCORRE VERTICES ADJACENTES DE VERT
 
-            if (Grafo->Mat[vert][i].distancia != 0 && M[i] == 0) {  // SE ARESTA EXISTE E ELA NÃO FOI VISITADA
+            if (Grafo->Mat[vert][i].distancia != 0 && Grafo->verticesDesativados[i] != 0 && M[i] == 0) {  // SE ARESTA EXISTE E ELA NÃO FOI VISITADA
 
                 NovaDist = (L[vert] + Grafo->Mat[vert][i].distancia);
 
@@ -275,4 +275,79 @@ void VerticesDesativados(TipoGrafo* Grafo){
 
     if(!flag)
         printf("nenhuma estação está desativada.");
+}
+
+void Caminho_mais_Barato(TipoGrafo *Grafo, int origem, int destino) {
+    origem--;
+    destino--;
+
+    int vert,i, k;
+    float NovaDist,min;
+    int *M = (int *) malloc(Grafo->NumVertices * sizeof(int));
+    float *L = (float *) malloc(Grafo->NumVertices * sizeof(float));
+    int *A = (int *) malloc(Grafo->NumVertices * sizeof(int));
+    int *caminho = (int *) malloc(Grafo->NumVertices * 3 * sizeof(int));
+
+    //INICIALIZANDO VARIÁVEIS
+    for (int i = 0; i < Grafo->NumVertices; i++) {
+        M[i] = 0;       //FALSE - DETERMINA SE UM VÉRTICE JÁ FOI VISITADO
+        A[i] = -1;      // DETERMINA O CAMINHO MAIS CURTO ENTRE ORIGEM E DESTINO
+        L[i] = FLT_MAX;
+    }
+
+    vert = origem;
+    L[vert] = 0;
+
+    while (vert != destino && vert != -1) {                         // NÃO TERMINOU OU CAMINHO INEXISTENTE
+
+        for (i = 0; i < Grafo->NumVertices; i++) {              // PERCORRE VERTICES ADJACENTES DE VERT
+
+            if (Grafo->Mat[vert][i].preco != 0 && Grafo->verticesDesativados[i] != 0 && M[i] == 0) {  // SE ARESTA EXISTE E ELA NÃO FOI VISITADA
+
+                NovaDist = (L[vert] + Grafo->Mat[vert][i].preco);
+
+                if (NovaDist < L[i]) {
+                    L[i] = NovaDist;                                // ATUALIZA MENOR DISTANCIA
+                    A[i] = vert;                                    // ATUALIZA CAMINHO
+                }
+            }
+        }
+
+        M[vert] = 1;    //TODA A LISTA DE ADJACENTES DE VERT JÁ FOI ANALISADA
+        min = FLT_MAX;  //MAIOR FLOAT POSSIVEL
+        vert = -1;      //VALOR INVÁLIDO
+
+        for (i = 0; i < Grafo->NumVertices; i++) {  //ENCONTRA PRÓXIMO VERTICE DO CAMINHO
+
+            if (M[i] == 0 && L[i] < min) {          // ESCOLHE O VERTICE CUJA ARESTA POSSUI O MENOR PESO
+
+                min = L[i];
+                vert = i;
+            }
+        }
+    }
+
+    //LISTAR O CAMINHO MAIS CURTO ENTRE ORIGEM E DESTINO
+
+    if (vert == destino) {  //ENCONTROU UM CAMINHO
+
+        printf("Caminho mais barato entre %d e %d custa R$ %0.2f:\n", origem+1, destino+1, L[destino]);
+
+        caminho[0] = destino;
+        k = 1;
+
+        while (vert != origem) {
+            caminho[k] = A[vert];
+            vert = A[vert];
+            k++;
+        }
+        for (i = k - 1; i >= 0; --i) {
+            if(i != 0)
+                printf("%d->", caminho[i]+1);
+            else
+                printf("%d", caminho[i]+1);
+        }
+    }
+    else
+        printf("Nao existe caminho entre %d e %d\n", origem, destino);
 }

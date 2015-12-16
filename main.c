@@ -19,6 +19,7 @@ int main(){
 	printf("10- Insere Arestas Arquivo.\n");
 	printf("11- Desativa Estação.\n");
 	printf("12- Mostrar Estações Desativadas.\n");
+	printf("13- Caminho mais barato.\n");
 	printf("0- Sair.");
 
 	do{
@@ -201,6 +202,16 @@ int main(){
 				VerticesDesativados(grafo);
 
 				break;
+			}
+
+			case 13:{
+				printf("\nEscolha o vertice de origem:\n");
+				scanf("%d",&v1);
+
+				printf("\nEscolha o vertice de destino:\n");
+				scanf("%d",&v2);
+
+				Caminho_mais_Barato(grafo, v1, v2);
 			}
 
 			default:
