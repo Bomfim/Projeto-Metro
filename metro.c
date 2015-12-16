@@ -185,10 +185,10 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
     int *caminho = (int *) malloc(Grafo->NumVertices * 3 * sizeof(int));
 
     //INICIALIZANDO VARIÁVEIS
-    for (i = 0; i < Grafo->NumVertices; i++) {
+    for (int i = 0; i < Grafo->NumVertices; i++) {
         M[i] = 0;       //FALSE - DETERMINA SE UM VÉRTICE JÁ FOI VISITADO
         A[i] = -1;      // DETERMINA O CAMINHO MAIS CURTO ENTRE ORIGEM E DESTINO
-        L[i] = 300000;  //infinito determina o comprimento do caminho mais curto
+        L[i] = FLT_MAX;
     }
 
     vert = origem;
@@ -210,7 +210,7 @@ void Caminho_mais_Curto(TipoGrafo *Grafo, int origem, int destino) {
         }
 
         M[vert] = 1;    //TODA A LISTA DE ADJACENTES DE VERT JÁ FOI ANALISADA
-        min = 300000;  //MAIOR FLOAT POSSIVEL
+        min = FLT_MAX;  //MAIOR FLOAT POSSIVEL
         vert = -1;      //VALOR INVÁLIDO
 
         for (i = 0; i < Grafo->NumVertices; i++) {  //ENCONTRA PRÓXIMO VERTICE DO CAMINHO
